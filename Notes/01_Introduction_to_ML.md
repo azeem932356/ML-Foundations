@@ -224,3 +224,19 @@ Evaluation
 Inference
 ↓
 Deployment
+
+
+
+
+---
+
+# Source
+
+These notes were created while studying the Google Machine Learning Crash Course.
+
+Course:
+Google ML Crash Course - Introduction to Machine Learning and Codebasics ML course on YouTube
+
+Link:
+https://developers.google.com/machine-learning/intro-to-ml/understanding
+https://www.youtube.com/playlist?list=PLeo1K3hjS3uvCeTYTeyfe0-rN5r8zn9rw
