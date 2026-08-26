@@ -1,0 +1,154 @@
+REGRESSION LOSS FUNCTIONS
+==========================
+
+Loss functions measure how wrong a regression model's predictions are.
+
+Example
+-------
+Actual delivery times:     10, 20, 30
+Predicted times:           12, 17, 36
+
+Error = Actual - Predicted:
+2, -3, 6
+
+
+1. L1 LOSS
+----------
+L1 uses the absolute value of each error.
+
+Absolute errors:
+|2|, |-3|, |6| = 2, 3, 6
+
+L1 Loss = 2 + 3 + 6 = 11
+
+Meaning:
+How much total are the predictions wrong?
+
+
+2. MEAN ABSOLUTE ERROR (MAE)
+----------------------------
+MAE is the average of the absolute errors.
+
+MAE = (|y1 - y_hat1| + ... + |yn - y_hatn|) / n
+
+For our example:
+
+MAE = (2 + 3 + 6) / 3
+MAE = 3.67
+
+Meaning:
+On average, the predictions are wrong by about 3.67 minutes.
+
+MAE stays in the original unit, so it is easy to understand.
+
+
+3. L2 LOSS
+----------
+L2 squares each error and then adds them.
+
+Squared errors:
+2^2, (-3)^2, 6^2 = 4, 9, 36
+
+L2 Loss = 4 + 9 + 36 = 49
+
+The important point:
+Large errors become much larger after squaring.
+
+Error:       2    3    6
+Squared:     4    9   36
+
+
+4. MEAN SQUARED ERROR (MSE)
+---------------------------
+MSE is the average of the squared errors.
+
+MSE = sum((y - y_hat)^2) / n
+
+For our example:
+
+MSE = (4 + 9 + 36) / 3
+MSE = 16.33
+
+MSE gives much more importance to large errors.
+
+
+5. ROOT MEAN SQUARED ERROR (RMSE)
+---------------------------------
+RMSE is the square root of MSE.
+
+RMSE = sqrt(MSE)
+
+For our example:
+
+RMSE = sqrt(16.33)
+RMSE ~= 4.04
+
+Why take the square root?
+
+MSE has squared units. If delivery time is measured in minutes:
+
+MAE  -> minutes
+MSE  -> minutes^2
+RMSE -> minutes
+
+So RMSE is easier to interpret in the original unit while still penalizing large errors more than MAE.
+
+
+THE WHOLE FAMILY
+----------------
+
+                         ERROR
+                           |
+              +------------+------------+
+              |                         |
+              v                         v
+          Absolute                   Squared
+            error                     error
+              |                         |
+              v                         v
+           L1 Loss                    L2 Loss
+              |                         |
+              v                         v
+           Average                    Average
+              |                         |
+              v                         v
+             MAE                       MSE
+                                          |
+                                          v
+                                     Square root
+                                          |
+                                          v
+                                        RMSE
+
+
+QUICK SUMMARY
+-------------
+
+L1 Loss  -> Absolute errors -> Add
+MAE      -> Absolute errors -> Average
+
+L2 Loss  -> Squared errors  -> Add
+MSE      -> Squared errors  -> Average
+RMSE     -> Square root of MSE
+
+Remember:
+
+MAE:
+"On average, how many units am I wrong?"
+
+MSE:
+"How much do large errors hurt me?"
+
+RMSE:
+"How large is my typical error in the original unit, while still penalizing large errors more than MAE?"
+
+
+CONNECTION TO LINEAR REGRESSION
+-------------------------------
+
+Ordinary Linear Regression is commonly based on minimizing squared errors
+(least squares). That is why MSE/L2 appears frequently when learning
+Linear Regression.
+
+For evaluation, we can use MAE, MSE, or RMSE depending on what we want
+the metric to tell us.
